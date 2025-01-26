@@ -58,9 +58,9 @@ local isDragging = false -- To prevent spamming issues
 local continuousDragging = false -- Flag for continuous teleporting
 
 -- Function to set target coordinates
-local function SetTargetCoords()
+local function SetTargetCoords(plankthing)
 	if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
-		local targetCoords = Player.Character.HumanoidRootPart.Position
+		local targetCoords = plankthing + Vector3.new(54, 0, 646)
 
 		-- Create the CFrame from the position
 		local cframed = CFrame.new(targetCoords)
@@ -124,6 +124,7 @@ local function DragAndMoveOnePlank()
 
 			if distance <= maxDistance then
                 countings = countings + 1
+				SetTargetCoords(plankPosition)
                 print(countings)
 				remote:FireServer(plank)
 				task.wait(0.2)  -- Changed wait to 0.15 for the first delay
