@@ -477,8 +477,7 @@ end
 local function saveCFrameToFile(cframe)
 	local fileName = "myfile.txt"
 	-- Convert CFrame to string, retaining all its components
-	local cframeString = string.format(
-		"CFrame.new(%f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f)",
+	local cframeString = string.format("CFrame.new(%f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f, %f)",
 		cframe:GetComponents()
 	)
 
@@ -710,11 +709,12 @@ local function StartTeleport()
                             local MainCFrame = child:FindFirstChild("MainCFrame")
                             if MainCFrame then
                                 MainCFrame = MainCFrame.Value
+                                saveCFrameToFile(MainCFrame)
                             end
                             local BuildDependentWood = child:FindFirstChild("BuildDependentWood")
     
                             -- Save MainCFrame to myfile.txt
-                            saveCFrameToFile(MainCFrame)
+                            
     
                             BuildDependentWood.BrickColor = BrickColor.new("Lime green")
                             
