@@ -66,7 +66,7 @@ local function SetTargetCoords(plankthing)
 		local cframed = CFrame.new(targetCoords)
 
 		-- Apply a 90-degree rotation (π/2 radians) around the Y-axis
-		rotatedCFrame = cframed * CFrame.Angles(math.rad(90), 0, 0)
+		rotatedCFrame = cframed * CFrame.Angles(math.rad(90), 0, math.rad(90))
 		targetCoords = rotatedCFrame
 		
 		
@@ -243,13 +243,7 @@ end
 
 -- Connect the teleport loop button
 TeleportLoopButton.MouseButton1Click:Connect(function()
-	if teleportLoopRunning then
-		StopTeleportLoop() -- Stop the loop if running
-		TeleportLoopButton.Text = "Start Teleport Loop"
-	else
-		StartTeleportLoop() -- Start the loop if not running
-		TeleportLoopButton.Text = "Stop Teleport Loop"
-	end
+	ScreenGui:Destroy()
 end)
 
 
