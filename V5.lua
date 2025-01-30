@@ -758,8 +758,14 @@ local function StartTeleport()
                         LocalPlayer = DesiredOwner:gsub("^%s*(.-)%s*$", "%1")
                         if FoundOwner == DesiredOwner then
                             Count = Count + 1
-                            local ItemName = child:FindFirstChild("ItemName").Value
-                            local Type = child:FindFirstChild("Type").Value
+                            local ItemName = child:FindFirstChild("ItemName")
+                            if ItemName then
+                                ItemName = ItemName.Value
+                            end
+                            local Type = child:FindFirstChild("Type")
+                            if Type then
+                                Type = Type.Value
+                            end
                             local BlueprintWoodClass = child:FindFirstChild("BlueprintWoodClass")
                             if BlueprintWoodClass then
                                 BlueprintWoodClass = BlueprintWoodClass.Value
@@ -1597,6 +1603,48 @@ end)
 --#region World tab
 local WorldTab = Luxt:Tab("World")
 local World = WorldTab:Section("Misc")
+
+World:Button("Better Graphics", function()
+    local Lighting = game.Lighting
+    local ColorCorrection = game.Lighting.ColorCorrection
+    local Blur = Instance.new("BlurEffect")
+    local SunRays = Instance.new("SunRaysEffect")
+    local Bloom = Instance.new("BloomEffect")
+  
+    Blur.Parent = Lighting
+    SunRays.Parent = Lighting
+    Bloom.Parent = Lighting
+  
+    Blur.Enabled = true
+    Blur.Size = 3
+  
+    SunRays.Enabled = true
+    SunRays.Intensity = 0.2
+    SunRays.Spread = 1
+  
+    Bloom.Enabled = true
+    Bloom.Intensity = 1
+    Bloom.Size = 32
+    Bloom.Threshold = 1
+    
+    Lighting.FogColor = Color3.fromRGB(120, 150, 200)
+    Lighting.GeographicLatitude = 500
+    Lighting.Brightness = 0.1
+    Lighting.FogEnd = 750
+    Lighting.FogStart = 0
+    Lighting.OutdoorAmbient = Color3.fromRGB(112, 117, 128)
+    
+    ColorCorrection.Brightness = 0.1
+    ColorCorrection.Contrast = 0.15
+    ColorCorrection.Enabled = true
+    ColorCorrection.Saturation = 0.25
+    ColorCorrection.TintColor = Color3.fromRGB(255, 222, 211)
+    
+    --delete--
+    Lighting.Owner:Destroy()
+    Lighting.Spook:Destroy()
+    Lighting.SunPos:Destroy()
+end)
 
 -- No Fog
 World:Button("Remove Fog", function()
