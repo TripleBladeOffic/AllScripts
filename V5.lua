@@ -654,8 +654,27 @@ local RedStone = {
     "ChopSaw",
     "ClockSwitch",
     "Lever0",
-    "PressurePlate"
+    "PressurePlate",
+    "Refridgerator",
+    "Seat_Couch",
+    "Seat_Armchair",
+    "SignalSustain",
+    "Seat_Loveseat",
+    "GateAND",
+    "GateNOT",
+    "GateOR",
+    "GateXOR",
+    "SignalDelay",
+    "Laser",
+    "LaserReceiver",
+    "Dishwasher",
+    "Bed2",
+    "Bed1",
+    "Toilet",
+    "Pickup1",
+    "Stove"
 }
+
 local NeonWires = {
     "NeonWireYellow",
     "NeonWireWhite",
@@ -700,8 +719,14 @@ local function StartTeleport()
                         LocalPlayer = DesiredOwner:gsub("^%s*(.-)%s*$", "%1")
                         if FoundOwner == DesiredOwner then
                             Count = Count + 1
-                            local ItemName = child:FindFirstChild("ItemName").Value
-                            local Type = child:FindFirstChild("Type").Value
+                            local ItemName = child:FindFirstChild("ItemName")
+                            if ItemName then
+                                ItemName = ItemName.Value
+                            end
+                            local Type = child:FindFirstChild("Type")
+                            if Type then
+                                Type = Type.Value
+                            end
                             local BlueprintWoodClass = child:FindFirstChild("BlueprintWoodClass")
                             if BlueprintWoodClass then
                                 BlueprintWoodClass = BlueprintWoodClass.Value
@@ -716,7 +741,9 @@ local function StartTeleport()
                             -- Save MainCFrame to myfile.txt
                             
     
-                            BuildDependentWood.BrickColor = BrickColor.new("Lime green")
+                            if BuildDependentWood then
+                                BuildDependentWood.BrickColor = BrickColor.new("Lime green")
+                                end
                             
                             local NewPart    = Instance.new("Part")
                             NewPart.CFrame   = child.MainCFrame.Value
@@ -738,8 +765,10 @@ local function StartTeleport()
                             end
     
                             NewPart:Destroy()
-                            print("Teleported Part Named : " .. ItemName)
-                            print("Teleported Total : " .. Count)
+                            print("Teleported Part Named : ")
+                            print(child.Name)
+                            print("Teleported Total : ")
+                            print(Count)
                             print("--------------------------------")
                         end
                     end
@@ -773,16 +802,18 @@ local function StartTeleport()
                             local MainCFrame = child:FindFirstChild("Main")
                             if MainCFrame then
                                 MainCFrame = MainCFrame.CFrame
+                                saveCFrameToFile(MainCFrame)
                             else						
                                 MainCFrame = child:FindFirstChild("MainCFrame")
                                 if MainCFrame then
                                     MainCFrame = MainCFrame.Value
+                                    saveCFrameToFile(MainCFrame)
                                 end
                             end
                             local BuildDependentWood = child:FindFirstChild("BuildDependentWood")
     
                             -- Save MainCFrame to myfile.txt
-                            saveCFrameToFile(MainCFrame)
+                            
     
                             if BuildDependentWood then
                                 BuildDependentWood.BrickColor = BrickColor.new("Lime green")
@@ -808,8 +839,10 @@ local function StartTeleport()
                             end
     
                             NewPart:Destroy()
-                            print("Teleported Part Named : " .. ItemName)
-                            print("Teleported Total : " .. Count)
+                            print("Teleported Part Named : ")
+                            print(child.Name)
+                            print("Teleported Total : ")
+                            print(Count)
                             print("--------------------------------")
                         end
                     end
@@ -828,17 +861,25 @@ local function StartTeleport()
                         LocalPlayer = DesiredOwner:gsub("^%s*(.-)%s*$", "%1")
                         if FoundOwner == DesiredOwner then
                             Count = Count + 1
-                            local ItemName = child:FindFirstChild("ItemName").Value
-                            local Type = child:FindFirstChild("Type").Value
+                            local ItemName = child:FindFirstChild("ItemName")
+                            if ItemName then
+                                ItemName = ItemName.Value
+                            end
+                            local Type = child:FindFirstChild("Type")
+                            if Type then
+                                Type = Type.Value
+                            end
                             local MainCFrame = child:FindFirstChild("MainCFrame")
                             if MainCFrame then
                                 MainCFrame = MainCFrame.Value
+                                saveCFrameToFile(MainCFrame)
                             else
                                 MainCFrame = child.Main.CFrame
+                                saveCFrameToFile(MainCFrame)
                             end
     
                             -- Save MainCFrame to myfile.txt
-                            saveCFrameToFile(MainCFrame)
+                            
     
                             local NewPart    = Instance.new("Part")
                             NewPart.CFrame   = MainCFrame
@@ -859,8 +900,10 @@ local function StartTeleport()
                             end
     
                             NewPart:Destroy()
-                            print("Teleported Part Named : " .. ItemName)
-                            print("Teleported Total : " .. Count)
+                            print("Teleported Part Named : ")
+                            print(child.Name)
+                            print("Teleported Total : ")
+                            print(Count)
                             print("--------------------------------")
                         end
                     end
@@ -879,19 +922,28 @@ local function StartTeleport()
                         LocalPlayer = DesiredOwner:gsub("^%s*(.-)%s*$", "%1")
                         if FoundOwner == DesiredOwner then
                             Count = Count + 1
-                            local ItemName = child:FindFirstChild("ItemName").Value
-                            local Type = child:FindFirstChild("Type").Value
+                            local ItemName = child:FindFirstChild("ItemName")
+                            if ItemName then
+                                ItemName = ItemName.Value
+                            end
+                            local Type = child:FindFirstChild("Type")
+                            if Type then
+                                Type = Type.Value
+                            end
                             local MainCFrame = child:FindFirstChild("MainCFrame")
                             if MainCFrame then
                                 MainCFrame = MainCFrame.Value
+                                saveCFrameToFile(MainCFrame)
                             elseif child:FindFirstChild("Main") then
                                 MainCFrame = child.Main.CFrame
+                                saveCFrameToFile(MainCFrame)
                             elseif child:FindFirstChild("SquarePos") then
                                 MainCFrame = child.SquarePos.Value
+                                saveCFrameToFile(MainCFrame)
                             end
     
                             -- Save MainCFrame to myfile.txt
-                            saveCFrameToFile(MainCFrame)
+                            
     
                             local NewPart    = Instance.new("Part")
                             NewPart.CFrame   = MainCFrame
@@ -912,8 +964,10 @@ local function StartTeleport()
                             end
     
                             NewPart:Destroy()
-                            print("Teleported Part Named : " .. ItemName)
-                            print("Teleported Total : " .. Count)
+                            print("Teleported Part Named : ")
+                            print(child.Name)
+                            print("Teleported Total : ")
+                            print(Count)
                             print("--------------------------------")
                         end
                     end
